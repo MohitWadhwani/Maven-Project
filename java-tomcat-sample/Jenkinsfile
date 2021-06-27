@@ -5,15 +5,14 @@ pipeline {
             steps {
 		bat label: '', script: 'mvn -f java-tomcat-sample/pom.xml clean package'
             }
-	}
             post {
                 success {
                     echo "Now Archiving the Artifacts...."
                     archiveArtifacts artifacts: '**/*.war'
                 }
             }
+    }
 	stage('Deploy Maven Application') {
 		build job: 'Maven Application Deployment'
 	}
-  }
 }
