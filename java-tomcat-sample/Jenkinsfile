@@ -13,7 +13,9 @@ pipeline {
             }
     }
 	stage('Deploy Maven Application') {
+		 steps{
 		build job: 'Maven Application Deployment'
+	       }
 	}
 }
 }
