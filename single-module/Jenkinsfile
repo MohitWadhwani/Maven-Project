@@ -10,6 +10,7 @@ pipeline {
             stage('Build') {
                   steps {
                         echo 'Building Sample Maven Project'
+			git url: 'https://github.com/MohitWadhwani/Maven-Project/single-module/'
 		        bat label: '', script: 'mvn clean install'
                   }
             }
