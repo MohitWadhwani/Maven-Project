@@ -1,0 +1,29 @@
+  
+pipeline {
+      agent any
+      stages {
+            stage('Init') {
+                  steps {
+                        echo 'Hi, Welcome to Devops'
+                  }
+            }
+            stage('Build') {
+                  steps {
+                        echo 'Building Sample Maven Project'
+						def  mavenHome = tool name:'maven-3' , type:'maven'
+                        def mavenCMD= "${mavenHome}/bin/mvn"
+                        "${mavenCMD} clean package"
+                  }
+            }
+            stage('Deploy') {
+                  steps {
+                        echo "Deploying"
+                  }
+		    post {
+               always {
+                archiveArtifacts artifacts: '**/*.jar', onlyIfSuccessful: true
+               }
+            }    
+        }            
+    }
+}
